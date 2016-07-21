@@ -1,0 +1,14 @@
+  <div class="well" id="<%= post.id%>">
+    <h3><%= post.name %> </h3>
+    <p> <%= post.content %> </p>
+    <p> <strong> Comentarios </strong> <%= post.comments.size %> </p>
+    <p> <strong> Último Comentario </strong> <%= truncate(post.comments.try(:last).try(:content), length:6) %> </p>
+
+    <p> <strong> Votos: </strong> <%= post.votes.size %> <%= link_to "Up", post_votes_path(post), method: :post %> </p>
+
+    <div class="btn-group">
+    <%= link_to 'Show', post, class:'btn btn-xs btn-primary' %>
+    <%= link_to 'Edit', edit_post_path(post), class:'btn btn-xs btn-warning' %>
+    <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-xs btn-danger'%>
+    </div>
+  </div>

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @post.name %>
+  <hr>
+	<%= link_to 'Edit', edit_post_path(@post) %> |
+	<%= link_to 'Back', posts_path %>
+
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+<hr>
+
+<div class="well">
+	<h2> Comentarios </h2>
+	<%= form_for([@post, Comment.new], class:"form") do |f| %>
+		<%= f.text_area :content, class:'form-control' %>
+		<%= f.submit "Enviar", class:"btn btn-primary" %>
+	<% end %>
+</div>
+
+<% @post.comments.each do |c| %>
+	<p> <%= link_to c.content, post_comment_path(@post, c) %>
+	<%= link_to "Editar", edit_post_comment_path(@post, c) %>
+	<%= link_to "Borrar", post_comment_path(@post, c), method: "Delete", class:"btn btn-danger" %>
+	</p>
+<% end %>
+
+

@@ -1,0 +1,7 @@
+<div class="well">
+	<h2> Comentarios </h2>
+	<%= form_for([@post, @comment], class:"form") do |f| %>
+		<%= f.text_area :content, class:'form-control' %>
+		<%= f.submit "Enviar", class:"btn btn-primary" %>
+	<% end %>
+</div>
