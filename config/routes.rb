@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  get 'votes/up'
 
+  devise_for :users
   resources :notes
   resources :posts do
     resources :comments
-    resources :votes
+    resources :votes, only: [:create]
   end
+
   root "posts#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
