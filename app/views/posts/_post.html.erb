@@ -1,10 +1,24 @@
   <div class="well" id="<%= post.id%>">
     <h3><%= post.name %> </h3>
+
+    <% post.tags.each do |tag| %>
+        <%= tag.name %>
+        <%= link_to "x", tag_path(tag), method: :delete %>
+    <% end %>
+
     <p> <%= post.content %> </p>
     <p> <strong> Comentarios </strong> <%= post.comments.size %> </p>
     <p> <strong> Último Comentario </strong> <%= truncate(post.comments.try(:last).try(:content), length:6) %> </p>
 
-    <p> <strong> Votos: </strong> <%= post.votes.size %> <%= link_to "Up", post_votes_path(post), method: :post %> </p>
+    <p> <strong> Votos: </strong> <%= post.votes.size %>
+    <% vote = Vote.where(user: current_user, post: post).first %>
+    <% if vote.nil? %>
+        <%= link_to "Up", post_votes_path(post), method: :post  %>
+    <% else %>
+        <%= link_to "Down", post_vote_path(post, vote), method: :delete %>
+    <% end %>
+
+    </p>
 
     <div class="btn-group">
     <%= link_to 'Show', post, class:'btn btn-xs btn-primary' %>

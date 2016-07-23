@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
 
+  resources :tags
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
 
-
-  resources :notes
   resources :posts do
     resources :comments
-    resources :votes, only: [:create]
+    resources :votes, only: [:create, :destroy]
   end
 
   root "posts#index"

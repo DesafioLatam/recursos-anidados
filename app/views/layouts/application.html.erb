@@ -17,11 +17,10 @@
 
 <%= render 'layouts/navbar' %>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-
 <div class="container">
+	<div class="notice" style="color:green"><%= notice %></div>
+	<div class="alert" style="color:red"><%= alert %></div>
+
 	<%= yield %>
 </div>
 
